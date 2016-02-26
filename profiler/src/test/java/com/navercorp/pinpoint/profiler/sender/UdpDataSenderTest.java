@@ -20,6 +20,7 @@ import com.navercorp.pinpoint.profiler.logging.Slf4jLoggerBinderInitializer;
 import com.navercorp.pinpoint.profiler.sender.UdpDataSender;
 import com.navercorp.pinpoint.thrift.dto.TAgentInfo;
 
+import com.navercorp.pinpoint.thrift.dto.TIruenInfo;
 import org.junit.Assert;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -53,19 +54,20 @@ public class UdpDataSenderTest {
         UdpDataSender sender = new UdpDataSender("localhost", 9009, "test", 128, 1000, 1024*64*100);
 
         TAgentInfo agentInfo = new TAgentInfo();
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
-        sender.send(agentInfo);
+        TIruenInfo iruenInfo = new TIruenInfo();
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
+        sender.send(iruenInfo);
         sender.stop();
     }
 

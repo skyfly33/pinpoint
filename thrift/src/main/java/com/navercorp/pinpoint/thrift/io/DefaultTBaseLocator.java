@@ -16,19 +16,9 @@
 
 package com.navercorp.pinpoint.thrift.io;
 
+import com.navercorp.pinpoint.thrift.dto.*;
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
-
-import com.navercorp.pinpoint.thrift.dto.TAgentInfo;
-import com.navercorp.pinpoint.thrift.dto.TAgentStat;
-import com.navercorp.pinpoint.thrift.dto.TAgentStatBatch;
-import com.navercorp.pinpoint.thrift.dto.TApiMetaData;
-import com.navercorp.pinpoint.thrift.dto.TResult;
-import com.navercorp.pinpoint.thrift.dto.TSpan;
-import com.navercorp.pinpoint.thrift.dto.TSpanChunk;
-import com.navercorp.pinpoint.thrift.dto.TSpanEvent;
-import com.navercorp.pinpoint.thrift.dto.TSqlMetaData;
-import com.navercorp.pinpoint.thrift.dto.TStringMetaData;
 
 /**
  * @author emeroad
@@ -36,7 +26,7 @@ import com.navercorp.pinpoint.thrift.dto.TStringMetaData;
  * @author netspider
  * @author hyungil.jeong
  * @author jaehong.kim
- *   - add CHUNK_HEADER
+ *         - add CHUNK_HEADER
  */
 class DefaultTBaseLocator implements TBaseLocator {
 
@@ -48,7 +38,7 @@ class DefaultTBaseLocator implements TBaseLocator {
 
     private static final short AGENT_INFO = 50;
     private static final Header AGENT_INFO_HEADER = createHeader(AGENT_INFO);
-    
+
     private static final short AGENT_STAT = 55;
     private static final Header AGENT_STAT_HEADER = createHeader(AGENT_STAT);
     private static final short AGENT_STAT_BATCH = 56;
@@ -59,7 +49,7 @@ class DefaultTBaseLocator implements TBaseLocator {
 
     private static final short SPANEVENT = 80;
     private static final Header SPANEVENT_HEADER = createHeader(SPANEVENT);
-    
+
     private static final short SQLMETADATA = 300;
     private static final Header SQLMETADATA_HEADER = createHeader(SQLMETADATA);
 
@@ -71,10 +61,13 @@ class DefaultTBaseLocator implements TBaseLocator {
 
     private static final short STRINGMETADATA = 330;
     private static final Header STRINGMETADATA_HEADER = createHeader(STRINGMETADATA);
-    
+
     private static final short CHUNK = 400;
     private static final Header CHUNK_HEADER = createHeader(CHUNK);
-    
+
+    private static final short IRUEN_INFO = 50;
+    private static final Header IRUEN_HEADER = createHeader(IRUEN_INFO);
+
     @Override
     public TBase<?, ?> tBaseLookup(short type) throws TException {
         switch (type) {
@@ -141,7 +134,11 @@ class DefaultTBaseLocator implements TBaseLocator {
         if (tbase instanceof NetworkAvailabilityCheckPacket) {
             return NETWORK_CHECK_HEADER;
         }
-        
+
+        if (tbase instanceof TIruenInfo) {
+            return IRUEN_HEADER;
+        }
+
         throw new TException("Unsupported Type" + tbase.getClass());
     }
 
@@ -192,7 +189,7 @@ class DefaultTBaseLocator implements TBaseLocator {
 
         return false;
     }
-    
+
     private static Header createHeader(short type) {
         Header header = new Header();
         header.setType(type);

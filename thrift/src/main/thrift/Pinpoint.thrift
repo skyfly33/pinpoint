@@ -1,5 +1,10 @@
 namespace java com.navercorp.pinpoint.thrift.dto
 
+struct TIruenInfo {
+    1: optional string userName
+    2: optional string userPass
+}
+
 struct TServiceInfo {
     1: optional string          serviceName
     2: optional list<string>    serviceLibs

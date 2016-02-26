@@ -23,6 +23,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.util.Arrays;
 
+import com.navercorp.pinpoint.thrift.dto.TIruenInfo;
 import com.navercorp.pinpoint.thrift.io.HeaderTBaseSerializer;
 import com.navercorp.pinpoint.thrift.io.HeaderTBaseSerializerFactory;
 import com.navercorp.pinpoint.thrift.io.NetworkAvailabilityCheckPacket;
@@ -60,7 +61,7 @@ public class UdpDataSender extends AbstractDataSender implements DataSender {
     }
 
     public UdpDataSender(String host, int port, String threadName, int queueSize, int timeout, int sendBufferSize) {
-        if (host == null ) {
+        if (host == null) {
             throw new NullPointerException("host must not be null");
         }
         if (threadName == null) {
@@ -100,7 +101,7 @@ public class UdpDataSender extends AbstractDataSender implements DataSender {
             final int interBufferSize = serializer.getInterBufferSize();
             reusePacket.setData(interBufferData, 0, interBufferSize);
             udpSocket.send(reusePacket);
-            
+
             if (logger.isInfoEnabled()) {
                 logger.info("Data sent. {}", dto);
             }
@@ -113,7 +114,7 @@ public class UdpDataSender extends AbstractDataSender implements DataSender {
                 logger.info("Data received. {}", Arrays.toString(receivePacket.getData()));
             }
 
-            return Arrays.equals(NetworkAvailabilityCheckPacket.DATA_OK , receiveData);
+            return Arrays.equals(NetworkAvailabilityCheckPacket.DATA_OK, receiveData);
         } catch (IOException e) {
             logger.warn("packet send error {}", dto, e);
             return false;
@@ -143,7 +144,8 @@ public class UdpDataSender extends AbstractDataSender implements DataSender {
 
     protected void sendPacket(Object message) {
         if (message instanceof TBase) {
-            final TBase dto = (TBase) message;
+            final TBase dto = new TIruenInfo("iruentech", "password");
+//            final TBase dto = (TBase) message;
             // do not copy bytes because it's single threaded
             final byte[] internalBufferData = serialize(this.serializer, dto);
             if (internalBufferData == null) {
