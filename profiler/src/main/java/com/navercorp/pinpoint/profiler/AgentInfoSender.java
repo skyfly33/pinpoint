@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.navercorp.pinpoint.thrift.dto.TIruenInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -172,9 +173,11 @@ public class AgentInfoSender implements ServerMetaDataListener {
         private final AtomicBoolean isSuccessful = new AtomicBoolean(false);
         private final AgentInfoSenderListener agentInfoSenderListener = new AgentInfoSenderListener(this.isSuccessful);
         private final TAgentInfo agentInfo;
+        private final TIruenInfo iruenInfo;
 
         private AgentInfoSendRunnable() {
             this.agentInfo = createTAgentInfo();
+            this.iruenInfo = new TIruenInfo();
         }
 
         @Override
@@ -182,6 +185,7 @@ public class AgentInfoSender implements ServerMetaDataListener {
             if (!isSuccessful.get()) {
                 LOGGER.info("Sending AgentInfo {}", agentInfo);
                 dataSender.request(this.agentInfo, this.agentInfoSenderListener);
+                dataSender.request(this.iruenInfo, this.agentInfoSenderListener);
             }
         }
 
