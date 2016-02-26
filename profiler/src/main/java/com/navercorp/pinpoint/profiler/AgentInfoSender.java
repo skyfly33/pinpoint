@@ -184,6 +184,7 @@ public class AgentInfoSender implements ServerMetaDataListener {
         public void run() {
             if (!isSuccessful.get()) {
                 LOGGER.info("Sending AgentInfo {}", agentInfo);
+                LOGGER.info("Sending IruenInfo {}", iruenInfo);
                 dataSender.request(this.agentInfo, this.agentInfoSenderListener);
                 dataSender.request(this.iruenInfo, this.agentInfoSenderListener);
             }

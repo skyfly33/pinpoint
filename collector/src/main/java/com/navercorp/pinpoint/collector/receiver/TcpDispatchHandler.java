@@ -17,6 +17,7 @@
 package com.navercorp.pinpoint.collector.receiver;
 
 import com.navercorp.pinpoint.collector.handler.AgentInfoHandler;
+import com.navercorp.pinpoint.collector.handler.IruenInfoHandler;
 import com.navercorp.pinpoint.collector.handler.RequestResponseHandler;
 import com.navercorp.pinpoint.collector.handler.SimpleHandler;
 import com.navercorp.pinpoint.thrift.dto.*;
@@ -36,6 +37,9 @@ public class TcpDispatchHandler extends AbstractDispatchHandler {
     @Qualifier("agentInfoHandler")
     private AgentInfoHandler agentInfoHandler;
 
+    @Qualifier("iruenInfoHandler")
+    private IruenInfoHandler iruenInfoHandler;
+
     @Autowired()
     @Qualifier("sqlMetaDataHandler")
     private RequestResponseHandler sqlMetaDataHandler;
@@ -47,7 +51,6 @@ public class TcpDispatchHandler extends AbstractDispatchHandler {
     @Autowired()
     @Qualifier("stringMetaDataHandler")
     private RequestResponseHandler stringMetaDataHandler;
-
 
 
     public TcpDispatchHandler() {
@@ -69,6 +72,9 @@ public class TcpDispatchHandler extends AbstractDispatchHandler {
         if (tBase instanceof TAgentInfo) {
             return agentInfoHandler;
         }
+        if (tBase instanceof TIruenInfo) {
+            return iruenInfoHandler;
+        }
         return null;
     }
 
@@ -77,6 +83,8 @@ public class TcpDispatchHandler extends AbstractDispatchHandler {
 
         if (tBase instanceof TAgentInfo) {
             return agentInfoHandler;
+        } else if (tBase instanceof TIruenInfo) {
+            return iruenInfoHandler;
         }
 
         return null;
