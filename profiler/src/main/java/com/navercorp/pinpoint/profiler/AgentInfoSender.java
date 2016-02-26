@@ -44,6 +44,7 @@ import com.navercorp.pinpoint.thrift.dto.TServiceInfo;
  * @author emeroad
  * @author koo.taejin
  * @author HyunGil Jeong
+ * @author lee.donghoon
  */
 public class AgentInfoSender implements ServerMetaDataListener {
     // refresh daily

@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * @author emeroad
  * @author koo.taejin
+ * @author lee.donghoon
  */
 public class TcpDispatchHandler extends AbstractDispatchHandler {
 
@@ -37,6 +38,7 @@ public class TcpDispatchHandler extends AbstractDispatchHandler {
     @Qualifier("agentInfoHandler")
     private AgentInfoHandler agentInfoHandler;
 
+    @Autowired()
     @Qualifier("iruenInfoHandler")
     private IruenInfoHandler iruenInfoHandler;
 

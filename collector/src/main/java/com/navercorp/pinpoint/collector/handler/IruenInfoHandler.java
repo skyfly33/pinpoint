@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * @author donghoon.lee
+ * @author lee.donghoon
  */
 @Service("iruenInfoHandler")
 public class IruenInfoHandler implements SimpleHandler, RequestResponseHandler {

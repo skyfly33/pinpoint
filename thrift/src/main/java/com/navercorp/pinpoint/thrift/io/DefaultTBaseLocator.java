@@ -27,6 +27,7 @@ import org.apache.thrift.TException;
  * @author hyungil.jeong
  * @author jaehong.kim
  *         - add CHUNK_HEADER
+ * @author lee.donghoon
  */
 class DefaultTBaseLocator implements TBaseLocator {
 
